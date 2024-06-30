@@ -1,6 +1,6 @@
 <?php 
  include('connect.php');
- error_reporting(0);
+ //error_reporting(0);
 if(isset($_POST['submit'])){
      $file_name1 =$_FILES['img1']['name'];
   
