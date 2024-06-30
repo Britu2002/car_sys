@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <style></style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .res{
+        color: rgb(0,128, 0,0.811);
+        text-decoration: none;
+        font-weight: 700;
+        margin-left: 10px;
+      }
+    </style>
+    <!-- Your custom CSS file -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg ">
+       <a class="navbar-brand mx-4 fs-2 fw-semibold " href="home.php">Car Rental System</a>
+    </nav>
+    <div
+      class="d-flex align-items-center justify-content-center h-100  row-fluid mt-5 ">
+      <div class="border col-xl-4 col-sm-8 bg-light shadow-lg ">
+        
+        <form class="p-3">
+          <h4 class="p-2 fs-3 text-primary  ">Login</h4>
+          <div class="px-2">
+            <label for="" class="mb-2 fs-5 ">Enter Email</label><br />
+            <input type="email" class="form-control p-3 fs-6  " placeholder="Email" name="cemail" required />
+          </div>
+          <div class="px-2">
+            <label for="" class="mb-2 mt-2 fs-5   ">Enter Password</label><br />
+            <input type="password" class="form-control p-3 fs-6 " placeholder="Password"  name="cpass" required />
+          </div>
+            <input 
+            type="submit"
+            class="btn btn-primary  rounded-5 p-2 fs-5  my-4 form-control "
+            value="login"
+            id="login" >
+        </input>
+        </form>
+        <p class="mx-4 fs-6">
+          Do not have an accout ?<a href="customer_details.html" class="res" >Register</a>
+        </p>
+      </div>
+    </div>
+    <script>
+      $("form").submit(function (e) {
+        $("#login").val("please Wait..");
+
+        $.ajax({
+          url: "login.php",
+          type: "post",
+
+          data: $("form").serialize(),
+          success: function (data) {
+            if (data.trim() === "true") {
+              Swal.fire({
+                title: "login",
+                text: "You can login successfull!",
+                icon: "success",
+              }).then(function () {
+                window.location.href = "home.php";
+              });
+            } else {
+              Swal.fire({
+                title: "Soory!",
+                text: "not correct!",
+                icon: "error",
+              });
+            }
+
+            $("#login").val("login");
+
+            $("form")["0"].reset();
+          },
+        });
+
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
